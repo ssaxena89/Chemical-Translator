@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Chemical Translator</title>
+        <script src="main.js"></script>
+    </head>
+    <body class="text-center montserrat-font container">
+        <div style="margin-top: 50px;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h1>Chemical Translator</h1>
+                <textarea class="responsive" id="input" style="font-size: large; color: gray; width: 60%; resize: none; word-wrap: break-word;"></textarea><br>
+                <button style="font-size: x-large;" class="btn btn-primary" onclick="translateStatement()">Translate</button>
+                <button style="font-size: xx-large;" class="btn btn-warning fas fa-dice"; onclick="randomEquation()"></button>
+            <hr style="border: 2px double black;">
+            <h1 id="output">~Result here~</h1>
+        </div>
+    </body>
+    <style>
+        body {
+            text-align: justify;
+            font: "Montserrat", sans-serif;
+        }
+        .montserrat-font {
+            font-family: "Montserrat", sans-serif;
+            font-optical-sizing: auto;
+        }
+        .loader {
+            border: 5px solid #f3f3f3; /* Light grey */
+            border-top: 5px solid black; /* Blue */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite; /* Spin animation */
+            margin: 50px auto; /* Center the loader */
+        }
+
+        /* Spin animation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <script>
+        var recInputWidth = document.getElementById("input").style.width;
+        var recInputHeight = document.getElementById("input").style.height;
+        var recInputFontSize = document.getElementById("input").style.fontSize;
+        var recOutputFontSize = document.getElementById("output").style.fontSize;
+        setInterval(function(){
+            if(screen.width<=500){
+                document.getElementById("input").style.width = (screen.width)/2 +100 + "px";
+                document.getElementById("input").style.height = 99999/(screen.width) + "px";
+                document.getElementById("input").style.fontSize = 7700/(screen.width) + "px";
+                if(result.length>=25){document.getElementById("output").style.fontSize = 6800/(screen.width) + "px";}
+                else if(result.length>20){document.getElementById("output").style.fontSize = 8000/(screen.width) + "px";}
+                else if(result.length<18){document.getElementById("output").style.fontSize = 9500/(screen.width) + "px";}
+            } else if(screen.width>500 && screen.width<=624){
+                document.getElementById("input").style.width = (screen.width)/2 +100 + "px";
+                document.getElementById("input").style.height = 99999/(screen.width) + "px";
+                document.getElementById("input").style.fontSize = 9000/(screen.width) + "px";
+                document.getElementById("output").style.fontSize = 14000/(screen.width) + "px";
+            } else if(screen.width>624 && screen.width<=1000){
+                document.getElementById("input").style.width = (screen.width)/2 +100 + "px";
+                document.getElementById("input").style.height = 99999/(screen.width) + "px";
+                document.getElementById("input").style.fontSize = 20000/(screen.width) + "px";
+                document.getElementById("output").style.fontSize = 22200/(screen.width) + "px";
+            } else if (screen.width > 1000) {
+                document.getElementById("input").style.width = recInputWidth;
+                document.getElementById("input").style.height = recInputHeight;
+                document.getElementById("input").style.fontSize = recInputFontSize;
+                document.getElementById("output").style.fontSize = recOutputFontSize;
+            }
+        }, 1)
+        const textarea = document.getElementById("input");
+        textarea.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                translateStatement();
+            }
+        });
+    </script>
+</html>
